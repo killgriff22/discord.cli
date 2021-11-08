@@ -1,0 +1,4 @@
+discord
+colorama
+requests
+discord.py-self
