@@ -1,5 +1,5 @@
 class config:
     DEVMODE = False
     RoleColors = False
-    TOKEN = "TOKEN"
+    TOKEN = "user_token_here"
     PREFIX = "!"

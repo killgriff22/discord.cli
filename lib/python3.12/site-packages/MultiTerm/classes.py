@@ -90,19 +90,22 @@ class Screen(canvas):
 
 
 class cluster:
-    def __init__(self):
-        self.screens = []
+    def __init__(self, screens:list[Screen] = []):
+        self.screens = screens
         self.focus = 0
-        self.cursors = []
-
+        self.cursors = [[0,0] for _ in screens]
+    def __repr__(self):
+        return self.screens
     def draw(self, index: int):
         if not index > len(self.screens):
             self.screens[index].draw()
-
     def draw_all(self):
         for screen in self.screens:
             screen.draw()
-
+    def clear(self):
+        for i,screen in enumerate(self.screens):
+            screen.clear()
+            self.cursors[i] = [0,0]
     def remove_screen(self, index: int):
         if not index > len(self.screens):
             self.screens[index].clear()
@@ -114,7 +117,6 @@ class cluster:
         while True:
             event = window.get_event()       
             for screen in self.screens:
-                screen.draw()
                 if type(event) == asciimaticsEvent.MouseEvent:
                     if screen.pos[0] <= event.x <= screen.pos[0]+screen.size[0] and screen.pos[1] <= event.y <= screen.pos[1]+screen.size[1]:
                         self.focus = self.screens.index(screen)
@@ -129,5 +131,6 @@ class cluster:
                     self.screens[self.screens.index(screen)].events[list(keys.keys()).index(event.key_code)].set()
                     self.screens[self.focus].cursor[0] += 1
                     self.cursors[self.focus][0] += 1
-                callback(screen,event,self.focus,self.screens)
+                callback(screen,event,self.focus,self)
+                self.draw_all()
             sleep(0.1)

@@ -13,7 +13,7 @@ from asciimatics import event as asciimaticsEvent
 from time import sleep
 window = Screen.open()
 __exit__ = exit
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+#os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 def clean_exit():
     window.close()

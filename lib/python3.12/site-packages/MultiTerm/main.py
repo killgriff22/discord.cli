@@ -6,11 +6,11 @@ screens = cluster()
 screens.add_screen(screen1)
 screens.add_screen(screen2)
 cursors = [[0,0],[0,0]]
-def main(screen,event,focus,screens):
+def main(screen:Screen,event,focus:int,screens:cluster):
     if focus == screens.index(screen):
         if type(event) == asciimaticsEvent.MouseEvent:
-            screen.blit("█", (event.x-screen.pos[0], event.y-screen.pos[1]))
+            screen.fill(f"{Fore.BLUE}{Back.BLUE}█{RESET}")
     else:
-        screen.fill(f"{RESET} {RESET}")
+        screen.fill(f"{Back.BLACK} {RESET}")
 
 screens.loop(main)
