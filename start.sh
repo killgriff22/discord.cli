@@ -1,1 +1,0 @@
-python ./SCRIPTS/main.py

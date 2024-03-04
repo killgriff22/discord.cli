@@ -1,41 +1,21 @@
-import colorama
-import discord
-from utils import configloader
+from classes import *
 
-currentchannel = int(open("./guildcfg", "r").read().split("\n")[1])
-currentguild = open("./guildcfg", "r").read().split("\n")[0]
-config = configloader.loadconfig()
-valid_hex = '0123456789ABCDEF'.__contains__
+if open("./guildcfg", "r").read() != "":
+    currentchannel = int(open("./guildcfg", "r").read().split("\n")[1])
+    currentguild = int(open("./guildcfg", "r").read().split("\n")[0])
 prefix = config.PREFIX
 user = discord.Client()
 msglen = 0
+width,height = os.get_terminal_size()
 
+top_bar = MultiTerm.Screen((width,1),(0,0))
+message_space = MultiTerm.Screen((width,height-2),(0,1))
+text_bar = MultiTerm.Screen((width,1),(0,height-1))
 
-def cleanhex(
-        data
-):  # used for cleaning the hexadecimal color codes for fore_fromhex()
-    return ''.join(filter(valid_hex, data.upper()))
-
-
-def fore_fromhex(text, hexcode):  # used for generating the role colors
-    """print in a hex defined color"""
-
-    if hexcode == "#000000":
-        return "\033[38;2;0;0;0;48;2;255;255;255m{}".format(text)
-    elif hexcode == "#FFFFFF":
-        return (text, colorama.Fore.BLACK, colorama.Back.WHITE)
-    hexint = int(cleanhex(hexcode), 16)
-    return ("\x1B[48;2;{};{};{}m{}\x1B[0m".format(hexint >> 16,
-                                                  hexint >> 8 & 0xFF,
-                                                  hexint & 0xFF, text))
-
-
-if config.settings.rolecolors == True:  # if rolecolors is enabled by a "1" in the cfg file colorama inits
+if config.RoleColors == True:  # if rolecolors is enabled by a "1" in the cfg file colorama inits
     colorama.init()
 
 
-def getcolor(user):  # gets the top role color from the user
-    return str(user.top_role.color)
 
 
 @user.event
