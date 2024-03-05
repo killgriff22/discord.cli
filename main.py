@@ -98,7 +98,7 @@ async def input_loop():
                 mode = modes.messages
     text_bar.blit(f"{prefix} {msg}", (0, 0))
     text_bar.draw()
-    top_bar.blit(f"signed in as: {user.user.display_name}, guild: {user.get_guild(currentguild).name}, channel: {user.get_channel(currentchannel).name}",(0,0))
+    top_bar.blit(f"signed in as: {user.user.display_name}, guild: {user.get_guild(currentguild).name}, channel: {user.get_channel(currentchannel).name}",(0,0),colorama.Fore.BLUE,MultiTerm.RESET)
     top_bar.draw()
     cursor_pos(0,height-1)
 user.run(config.TOKEN)
