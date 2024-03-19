@@ -1,13 +1,11 @@
 from classes import *
 
 
-def cleanhex(data):  # used for cleaning the hexadecimal color codes for fore_fromhex()
-    return ''.join(filter(valid_hex, data.upper()))
-
-
 def getcolor(user):  # gets the top role color from the user
     return str(user.top_role.color)
 
+def cleanhex(data):  # used for cleaning the hexadecimal color codes for fore_fromhex()
+    return ''.join(filter(valid_hex, data.upper()))
 
 def fore_fromhex(hexcode):  # used for generating the role colors
     """print in a hex defined color"""
